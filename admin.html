@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Ndalem Pitik</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="login-screen">
+    <div class="login-card">
+      <img src="assets/logo.png" alt="Logo Ndalem Pitik" class="login-logo" id="login-logo-img">
+      <h1 class="login-title">Admin Ndalem Pitik</h1>
+      <p class="login-desc">Masukkan PIN atau kata sandi pengelola untuk mengatur isi materi website.</p>
+      
+      <form class="login-form" id="login-form">
+        <input type="password" id="login-pin-input" class="login-input" placeholder="••••••" autofocus required autocomplete="current-password">
+        <button type="submit" class="btn-login">Masuk ke Panel</button>
+        <p style="font-size: 0.78rem; color: #888; margin-top: 0.5rem;">PIN default: <code>admin123</code></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN CONTAINER -->
+  <div class="admin-container">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.png" alt="Logo" class="sidebar-logo-img" id="sidebar-logo">
+        <div class="sidebar-brand">
+          <h2 id="sidebar-farm-name">Ndalem Pitik</h2>
+          <span>Admin Panel</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="tab-dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-tab="tab-products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2 2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          Katalog Produk
+        </button>
+        <button class="nav-item" data-tab="tab-hero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Hero & Banner
+        </button>
+        <button class="nav-item" data-tab="tab-features">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Keunggulan
+        </button>
+        <button class="nav-item" data-tab="tab-order">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          Alur Pemesanan
+        </button>
+        <button class="nav-item" data-tab="tab-testimonials">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Testimoni
+        </button>
+        <button class="nav-item" data-tab="tab-contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          Kontak & Footer
+        </button>
+        <button class="nav-item" data-tab="tab-settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Pengaturan & Sinkron
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" class="btn-sidebar-subtle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Lihat Website
+        </a>
+        <button id="btn-logout" class="btn-sidebar-subtle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Keluar
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <main class="main-wrapper">
+      
+      <!-- TOP BAR -->
+      <header class="top-bar">
+        <h2 class="top-bar-title" id="page-current-title">Dashboard Pengelola</h2>
+        <div class="top-bar-actions">
+          <a href="index.html" target="_blank" class="btn-action-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            Preview Web
+          </a>
+          <button id="btn-save-all" class="btn-action-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Simpan Perubahan
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENT BODY -->
+      <div class="content-body">
+
+        <!-- TAB 1: DASHBOARD -->
+        <div class="tab-pane active" id="tab-dashboard">
+          <div class="section-head">
+            <div>
+              <h2>Selamat Datang di Panel Pengelola</h2>
+              <p>Kelola seluruh isi tulisan, produk, gambar, kontak WhatsApp, dan testimoni website Ndalem Pitik secara instan.</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">🐔</div>
+              <div>
+                <div class="stat-val" id="stat-products-count">0</div>
+                <div class="stat-lbl">Produk Terdaftar</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">💬</div>
+              <div>
+                <div class="stat-val" id="stat-testimonials-count">0</div>
+                <div class="stat-lbl">Testimoni Pelanggan</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">📱</div>
+              <div>
+                <div class="stat-val" style="font-size: 1.15rem;" id="stat-wa-number">-</div>
+                <div class="stat-lbl">Nomor WhatsApp Aktif</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header-styled">
+              <h3>💡 Cara Kerja Pengeditan Materi</h3>
+            </div>
+            <p style="margin-bottom: 1rem; color: #444; font-size: 0.95rem;">
+              1. <strong>Edit Materi:</strong> Pilih menu di sidebar kiri (Katalog Produk, Banner, Keunggulan, Testimoni, atau Kontak).<br>
+              2. <strong>Klik "Simpan Perubahan":</strong> Perubahan akan langsung tersimpan dan dapat langsung Anda lihat di browser saat membuka website.<br>
+              3. <strong>Sinkronisasi ke GitHub:</strong> Buka menu <em>Pengaturan & Sinkron</em>, lalu klik <strong>"Unduh data.js"</strong>. Timpa file <code>data.js</code> di folder proyek Anda dan lakukan <code>git push</code> agar perubahan langsung online ke seluruh pengunjung internet.
+            </p>
+            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+              <button class="btn-action-primary" onclick="switchTab('tab-products')">Kelola Produk Sekarang</button>
+              <button class="btn-action-outline" onclick="switchTab('tab-hero')">Ubah Banner & Tulisan Hero</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: KATALOG PRODUK -->
+        <div class="tab-pane" id="tab-products">
+          <div class="section-head">
+            <div>
+              <h2>Katalog Produk</h2>
+              <p>Atur daftar produk ayam, telur, dan pakan yang tampil di website beserta harga dan status ketersediaan.</p>
+            </div>
+            <button class="btn-action-primary" id="btn-add-product">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Tambah Produk Baru
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header-styled">
+              <h3>Judul Bagian Katalog</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Label Tag Atas</label>
+                <input type="text" class="form-control" id="cat-tag-input" placeholder="Daftar Produk">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Judul Utama</label>
+                <input type="text" class="form-control" id="cat-title-input" placeholder="Produk Pilihan Terbaik untuk Kebutuhan Anda">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Deskripsi / Subtitle</label>
+                <input type="text" class="form-control" id="cat-sub-input" placeholder="Silakan filter kategori produk di bawah ini...">
+              </div>
+            </div>
+          </div>
+
+          <div class="product-items-grid" id="admin-product-list">
+            <!-- Rendered by admin.js -->
+          </div>
+        </div>
+
+        <!-- TAB 3: HERO & BANNER -->
+        <div class="tab-pane" id="tab-hero">
+          <div class="section-head">
+            <div>
+              <h2>Hero & Banner Utama</h2>
+              <p>Ubah tulisan pembuka, slogan, tombol aksi, dan foto banner utama pada bagian paling atas website.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Badge Label Kecil</label>
+                <input type="text" class="form-control" id="hero-badge-input" placeholder="100% Organik & Berkualitas Tinggi">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Judul Utama (Headline)</label>
+                <input type="text" class="form-control" id="hero-title-input" placeholder="Pelihara Kualitas, Nikmati Hasil Terbaik...">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Deskripsi Paragraf</label>
+                <textarea class="form-control" id="hero-desc-input" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Teks Tombol WhatsApp</label>
+                <input type="text" class="form-control" id="hero-btn-wa-input" placeholder="Hubungi WhatsApp">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Pesan Otomatis WhatsApp Saat Diklik</label>
+                <input type="text" class="form-control" id="hero-msg-wa-input" placeholder="Halo Ndalem Pitik, saya ingin konsultasi...">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Foto Banner Hero</label>
+                <div class="image-selector-wrap">
+                  <div class="img-preview-box" id="hero-img-preview-box">
+                    <img src="assets/hero.jpg" id="hero-img-preview" alt="Preview Hero">
+                  </div>
+                  <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                    <select class="form-control" id="hero-img-preset" style="flex: 1; min-width: 200px;">
+                      <option value="assets/hero.jpg">Preset: assets/hero.jpg</option>
+                      <option value="assets/kuntara.jpg">Preset: assets/kuntara.jpg</option>
+                      <option value="assets/fertil.jpg">Preset: assets/fertil.jpg</option>
+                      <option value="assets/fresh.jpg">Preset: assets/fresh.jpg</option>
+                    </select>
+                    <input type="file" id="hero-img-file" accept="image/*" class="form-control" style="flex: 1; min-width: 200px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: KEUNGGULAN (WHY US) -->
+        <div class="tab-pane" id="tab-features">
+          <div class="section-head">
+            <div>
+              <h2>Keunggulan & Mengapa Kami</h2>
+              <p>Atur 3 highlight fitur di bawah hero dan penjelasan section Mengapa Ndalem Pitik.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header-styled">
+              <h3>3 Highlight Fitur (Di Bawah Banner)</h3>
+            </div>
+            <div class="form-grid" id="highlights-form-grid">
+              <!-- Rendered via admin.js -->
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header-styled">
+              <h3>Bagian Mengapa Ndalem Pitik</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Label Tag</label>
+                <input type="text" class="form-control" id="why-tag-input" placeholder="Mengapa Ndalem Pitik?">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Judul Utama</label>
+                <input type="text" class="form-control" id="why-title-input" placeholder="Kualitas Terjamin Mulai dari Pemilihan Induk">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Deskripsi Paragraf</label>
+                <textarea class="form-control" id="why-desc-input" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;" id="why-items-container">
+              <!-- 3 items rendered by admin.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: ALUR PEMESANAN -->
+        <div class="tab-pane" id="tab-order">
+          <div class="section-head">
+            <div>
+              <h2>Alur Pemesanan</h2>
+              <p>Atur 3 langkah mudah pembelian yang dijelaskan kepada calon pembeli.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Label Tag</label>
+                <input type="text" class="form-control" id="order-tag-input" placeholder="Langkah Pembelian">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Judul Utama</label>
+                <input type="text" class="form-control" id="order-title-input" placeholder="Alur Pemesanan yang Mudah dan Cepat">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Deskripsi</label>
+                <input type="text" class="form-control" id="order-desc-input" placeholder="Ikuti 3 tahapan mudah berikut...">
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;" id="order-steps-container">
+              <!-- Rendered via admin.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: TESTIMONI -->
+        <div class="tab-pane" id="tab-testimonials">
+          <div class="section-head">
+            <div>
+              <h2>Testimoni Pelanggan</h2>
+              <p>Kelola ulasan dan review dari para pelanggan serta mitra peternak setia.</p>
+            </div>
+            <button class="btn-action-primary" id="btn-add-testi">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Tambah Testimoni
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header-styled">
+              <h3>Judul Bagian Testimoni</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Label Tag</label>
+                <input type="text" class="form-control" id="testi-tag-input" placeholder="Testimoni Pelanggan">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Judul Utama</label>
+                <input type="text" class="form-control" id="testi-title-input" placeholder="Kisah Sukses Bersama Ndalem Pitik">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Deskripsi</label>
+                <input type="text" class="form-control" id="testi-desc-input" placeholder="Berikut ulasan jujur dari beberapa mitra...">
+              </div>
+            </div>
+          </div>
+
+          <div class="product-items-grid" id="admin-testi-list">
+            <!-- Rendered by admin.js -->
+          </div>
+        </div>
+
+        <!-- TAB 7: KONTAK & FOOTER -->
+        <div class="tab-pane" id="tab-contact">
+          <div class="section-head">
+            <div>
+              <h2>Kontak & Informasi Peternakan</h2>
+              <p>Atur nama peternakan, nomor WhatsApp tujuan pesanan, alamat, dan email resmi.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Nama Peternakan</label>
+                <input type="text" class="form-control" id="contact-name-input" placeholder="Ndalem Pitik">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Slogan / Tagline Pendek</label>
+                <input type="text" class="form-control" id="contact-tagline-input" placeholder="Peternakan Ayam Kampung Kuntara4...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nomor WhatsApp (Format: 6289...)</label>
+                <input type="text" class="form-control" id="contact-wa-input" placeholder="6289665444702">
+                <small style="color: #777;">Gunakan format diawali 62 tanpa spasi atau tanda plus.</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nomor Telepon Tampilan</label>
+                <input type="text" class="form-control" id="contact-phone-input" placeholder="089665444702">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Peternakan</label>
+                <input type="email" class="form-control" id="contact-email-input" placeholder="ndalem.pitik@gmail.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Teks Hak Cipta (Copyright)</label>
+                <input type="text" class="form-control" id="contact-copy-input" placeholder="© 2026 Ndalem Pitik. All rights reserved.">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Alamat Lengkap Peternakan</label>
+                <textarea class="form-control" id="contact-address-input" rows="3" placeholder="Dusun Glonggong RT 02 RW 03..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 8: PENGATURAN & SINKRONISASI -->
+        <div class="tab-pane" id="tab-settings">
+          <div class="section-head">
+            <div>
+              <h2>Pengaturan & Sinkronisasi GitHub</h2>
+              <p>Unduh file data terbaru untuk di-upload ke GitHub dan atur kata sandi login admin.</p>
+            </div>
+          </div>
+
+          <!-- GITHUB SYNC CARD -->
+          <div class="card" style="border-left: 4px solid var(--primary-forest);">
+            <div class="card-header-styled">
+              <h3>📦 Unduh File data.js (Untuk Sinkronisasi GitHub)</h3>
+            </div>
+            <p style="font-size: 0.92rem; color: #444; margin-bottom: 1.2rem;">
+              Agar perubahan yang Anda buat di admin panel ini dapat dilihat oleh <strong>semua pengunjung website di internet</strong> melalui GitHub Pages, klik tombol di bawah untuk mendownload file <code>data.js</code> yang sudah diperbarui, lalu timpa file <code>data.js</code> di folder proyek dan lakukan <code>git push</code>.
+            </p>
+            <button class="btn-action-primary" id="btn-download-datajs">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Unduh data.js Sekarang
+            </button>
+          </div>
+
+          <!-- GANTI PIN ADMIN -->
+          <div class="card">
+            <div class="card-header-styled">
+              <h3>🔐 Ganti PIN / Password Masuk Admin</h3>
+            </div>
+            <div class="form-grid" style="max-width: 500px;">
+              <div class="form-group">
+                <label class="form-label">PIN Baru</label>
+                <input type="password" class="form-control" id="settings-new-pin" placeholder="Masukkan PIN baru">
+              </div>
+              <div class="form-group">
+                <button class="btn-action-outline" id="btn-change-pin" style="margin-top: 1.5rem;">Perbarui PIN</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESET DATA -->
+          <div class="card" style="border: 1px solid #ffcdd2;">
+            <div class="card-header-styled">
+              <h3 style="color: var(--accent-red);">⚠️ Reset Konten ke Data Bawaan Awal</h3>
+            </div>
+            <p style="font-size: 0.88rem; color: #666; margin-bottom: 1rem;">
+              Tindakan ini akan mengembalikan seluruh isi teks, produk, dan pengaturan ke data standar pabrik awal.
+            </p>
+            <button class="btn-card-action delete" id="btn-reset-data" style="max-width: 200px; padding: 0.6rem 1rem;">
+              Reset Semua ke Bawaan
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL: TAMBAH / EDIT PRODUK -->
+  <div class="modal-backdrop" id="modal-product">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-product-title">Tambah Produk Baru</h3>
+        <button class="modal-close" onclick="closeModal('modal-product')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="p-id">
+        <div class="form-group">
+          <label class="form-label">Nama / Judul Produk *</label>
+          <input type="text" class="form-control" id="p-title" required placeholder="Contoh: Ayam Kampung Kuntara4 (DOC)">
+        </div>
+        <div class="form-grid" style="gap: 0.8rem;">
+          <div class="form-group">
+            <label class="form-label">Kategori</label>
+            <select class="form-control" id="p-category">
+              <option value="ayam">Ayam Kampung</option>
+              <option value="telur">Telur Fertil & Konsumsi</option>
+              <option value="pakan">Pakan Ayam</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Label Badge</label>
+            <input type="text" class="form-control" id="p-badge" placeholder="Contoh: Ayam Unggul / Garansi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Harga (Tampilan)</label>
+            <input type="text" class="form-control" id="p-price" placeholder="Contoh: Rp 9.500">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Satuan</label>
+            <input type="text" class="form-control" id="p-unit" placeholder="Contoh: / Ekor, / Butir, / Kg">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status Ketersediaan</label>
+          <select class="form-control" id="p-status">
+            <option value="ready">Ready Stock (Tersedia)</option>
+            <option value="preorder">Pre-Order</option>
+            <option value="habis">Stok Habis</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pesan WhatsApp Khusus Produk Ini</label>
+          <input type="text" class="form-control" id="p-wamsg" placeholder="Halo, saya tertarik pesan produk ini...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deskripsi Lengkap</label>
+          <textarea class="form-control" id="p-desc" rows="3" placeholder="Jelaskan kualitas dan keunggulan produk..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Foto Produk</label>
+          <div class="image-selector-wrap">
+            <div class="img-preview-box">
+              <img src="assets/kuntara.jpg" id="p-img-preview" alt="Preview Produk">
+            </div>
+            <select class="form-control" id="p-img-preset">
+              <option value="assets/kuntara.jpg">Preset: assets/kuntara.jpg (Ayam)</option>
+              <option value="assets/fertil.jpg">Preset: assets/fertil.jpg (Telur Fertil)</option>
+              <option value="assets/fresh.jpg">Preset: assets/fresh.jpg (Telur Konsumsi)</option>
+              <option value="assets/feed.jpg">Preset: assets/feed.jpg (Pakan Ayam)</option>
+              <option value="custom">Gunakan Foto Upload / URL Sendiri</option>
+            </select>
+            <input type="file" id="p-img-file" accept="image/*" class="form-control">
+            <input type="text" id="p-img-url" class="form-control" placeholder="Atau tempel URL gambar langsung (https://...)">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action-outline" onclick="closeModal('modal-product')">Batal</button>
+        <button class="btn-action-primary" id="btn-save-product">Simpan Produk</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TAMBAH / EDIT TESTIMONI -->
+  <div class="modal-backdrop" id="modal-testimonial">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-testi-title">Tambah Testimoni</h3>
+        <button class="modal-close" onclick="closeModal('modal-testimonial')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="t-id">
+        <div class="form-group">
+          <label class="form-label">Nama Pelanggan *</label>
+          <input type="text" class="form-control" id="t-name" required placeholder="Contoh: Budi Santoso">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peran / Kota Asal</label>
+          <input type="text" class="form-control" id="t-role" placeholder="Contoh: Peternak Mandiri, Sleman">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Huruf Inisial Avatar (1 Huruf)</label>
+          <input type="text" class="form-control" id="t-avatar" maxlength="2" placeholder="B">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Isi Ulasan / Testimoni *</label>
+          <textarea class="form-control" id="t-text" rows="4" required placeholder="Tulis kepuasan pembeli..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action-outline" onclick="closeModal('modal-testimonial')">Batal</button>
+        <button class="btn-action-primary" id="btn-save-testi">Simpan Testimoni</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">Notifikasi berhasil</div>
+
+  <!-- JAVASCRIPTS -->
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
